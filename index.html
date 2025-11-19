@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Recolección de Datos</title>
+</head>
+<body>
+  <h2>Captura automática de datos</h2>
+  <p id="resultado">Procesando...</p>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const nombre = params.get("nombre") || "No enviado";
+    const telefono = params.get("telefono") || "No enviado";
+
+    document.getElementById("resultado").innerText =
+      "Nombre: " + nombre + " | Teléfono: " + telefono;
+  </script>
+</body>
+</html>
