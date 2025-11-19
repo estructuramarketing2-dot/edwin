@@ -57,16 +57,28 @@
     </div>
 
 <script>
+<script>
 document.getElementById("form").addEventListener("submit", function(e){
     e.preventDefault();
 
-    const nombre = this.nombre.value;
-    const telefono = this.telefono.value;
+    const data = {
+        nombre: this.nombre.value,
+        telefono: this.telefono.value
+    };
 
-    document.getElementById("msg").innerText =
-        "Enviado ✔: " + nombre + " - " + telefono;
+    fetch(https://script.google.com/macros/s/AKfycbxKN6a2fB1W7AANC668W61ZfkYer8KoK8pc7A3P-smulFnCzYxFKD6hZ2RiCNDe9lXc/exec, {
+        method: "POST",
+        mode: "no-cors",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    });
 
+    document.getElementById("resp").innerText = "Enviado ✓";
     this.reset();
+});
+</script>
 });
 </script>
 
