@@ -1,20 +1,74 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Recolección de Datos</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Captura de Datos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f2f2f2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .form-box {
+            background: white;
+            padding: 20px 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            width: 300px;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+        }
+        button {
+            margin-top: 20px;
+            width: 100%;
+            padding: 10px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        #msg {
+            margin-top: 15px;
+            color: green;
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
-  <h2>Captura automática de datos</h2>
-  <p id="resultado">Procesando...</p>
 
-  <script>
-    const params = new URLSearchParams(window.location.search);
-    const nombre = params.get("nombre") || "No enviado";
-    const telefono = params.get("telefono") || "No enviado";
+    <div class="form-box">
+        <h2>Registro</h2>
 
-    document.getElementById("resultado").innerText =
-      "Nombre: " + nombre + " | Teléfono: " + telefono;
-  </script>
+        <form id="form">
+            <input type="text" name="nombre" placeholder="Nombre completo" required>
+            <input type="text" name="telefono" placeholder="Teléfono" required>
+            <button type="submit">Enviar</button>
+        </form>
+
+        <p id="msg"></p>
+    </div>
+
+<script>
+document.getElementById("form").addEventListener("submit", function(e){
+    e.preventDefault();
+
+    const nombre = this.nombre.value;
+    const telefono = this.telefono.value;
+
+    document.getElementById("msg").innerText =
+        "Enviado ✔: " + nombre + " - " + telefono;
+
+    this.reset();
+});
+</script>
+
 </body>
 </html>
