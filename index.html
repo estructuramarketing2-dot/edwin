@@ -2,85 +2,48 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Captura de Datos</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f2f2f2;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-        .form-box {
-            background: white;
-            padding: 20px 30px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            width: 300px;
-        }
-        input {
-            width: 100%;
-            padding: 10px;
-            margin-top: 10px;
-        }
-        button {
-            margin-top: 20px;
-            width: 100%;
-            padding: 10px;
-            background: #007bff;
-            color: white;
-            border: none;
-            border-radius: 5px;
-        }
-        #msg {
-            margin-top: 15px;
-            color: green;
-            font-weight: bold;
-        }
-    </style>
+    <title>Registro</title>
 </head>
 <body>
+    <h2>Registro</h2>
 
-    <div class="form-box">
-        <h2>Registro</h2>
+    <form id="form">
+        <input type="text" id="nombre" placeholder="Nombre completo" required>
+        <input type="text" id="telefono" placeholder="Teléfono" required>
+        <button type="submit">Enviar</button>
+    </form>
 
-        <form id="form">
-            <input type="text" name="nombre" placeholder="Nombre completo" required>
-            <input type="text" name="telefono" placeholder="Teléfono" required>
-            <button type="submit">Enviar</button>
-        </form>
+    <script>
+        document.getElementById("form").addEventListener("submit", async (e) => {
+            e.preventDefault();
 
-        <p id="msg"></p>
-    </div>
+            const nombre = document.getElementById("nombre").value;
+            const telefono = document.getElementById("telefono").value;
 
-<script>
-<script>
-document.getElementById("form").addEventListener("submit", function(e){
-    e.preventDefault();
+            const data = {
+                nombre: nombre,
+                telefono: telefono
+            };
 
-    const data = {
-        nombre: this.nombre.value,
-        telefono: this.telefono.value
-    };
+            const url = "https://script.google.com/macros/s/AKfycbxc65EJAvfsGQVDygJl7LmLY2ibkj6BV4tyPTspomCCtuHokI3SHlpGNuJKhMKd-Yk/exec";
 
-    fetch(https://script.google.com/macros/s/AKfycbxKN6a2fB1W7AANC668W61ZfkYer8KoK8pc7A3P-smulFnCzYxFKD6hZ2RiCNDe9lXc/exec, {
-        method: "POST",
-        mode: "no-cors",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(data)
-    });
+            try {
+                const res = await fetch(url, {
+                    method: "POST",
+                    body: JSON.stringify(data),
+                    headers: {
+                        "Content-Type": "application/json"
+                    }
+                });
 
-    document.getElementById("resp").innerText = "Enviado ✓";
-    this.reset();
-});
-</script>
-});
-</script>
-
+                const result = await res.text();
+                alert("Datos enviados correctamente");
+                console.log(result);
+            } catch (error) {
+                alert("Error enviando datos");
+                console.log(error);
+            }
+        });
+    </script>
 </body>
 </html>
